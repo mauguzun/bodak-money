@@ -1,0 +1,14 @@
+<mat-card>
+    <mat-card-content *ngIf="!loader else loaderDiv ">
+        <ngx-dropzone (change)="onSelect($event)">
+            <ngx-dropzone-label>Drop it, baby!</ngx-dropzone-label>
+        </ngx-dropzone>
+    </mat-card-content>
+
+
+
+    <ng-template #emptyList>
+        <app-spinner></app-spinner>
+    </ng-template>
+
+</mat-card>

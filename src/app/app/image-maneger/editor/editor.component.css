@@ -1,0 +1,10 @@
+.mat-card-image{
+    
+    width: 100%;
+    object-fit: cover;
+    max-height: 300px;
+}
+.mat-card{
+    width: 45%;
+    display: inline-block;
+}

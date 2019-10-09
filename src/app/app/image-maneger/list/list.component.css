@@ -1,0 +1,12 @@
+.example-card {
+    max-width: 20%;
+    margin: 0.5%;
+    display: inline-block;
+}
+
+.mat-card-image{
+    width: 100%;
+    object-fit: cover;
+
+}
+

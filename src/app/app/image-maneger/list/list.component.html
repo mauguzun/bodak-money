@@ -1,0 +1,28 @@
+<div *ngIf="files.length > 0 ; else emptyList">
+    <mat-card class="example-card" *ngFor="let i of files">
+        <mat-card-header>
+            <mat-card-title>{{i.file.name}}</mat-card-title>
+            <mat-card-subtitle>{{i.file.lastModifiedDate}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="{{i.src}}" alt="Photo of a Shiba Inu">
+
+        <mat-card-actions>
+
+            <button [routerLink]="['editor',i.id]" mat-button>Edit</button>
+            <button [routerLink]="['/editor',i.id]" mat-button>{{i.id}}</button>
+            <button (click)="delete(i.file.lastModified)" mat-button>Delete</button>
+        </mat-card-actions>
+    </mat-card>
+
+</div>
+
+
+
+<ng-template #emptyList>
+    <mat-card>
+        <mat-card-content>
+            Please upload
+        </mat-card-content>
+    </mat-card>
+
+</ng-template>
