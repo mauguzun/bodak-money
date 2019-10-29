@@ -9,24 +9,24 @@ import { DbFileService } from 'src/app/shared/services/dbfile.service';
 })
 export class ListComponent implements OnInit {
 
-
-  files: DocumentFile[];
+  protected loader = true;
+  files: DocumentFile[] = []
 
 
   constructor(private dbservice: DbFileService) { }
 
   ngOnInit() {
-    this.files = [];
-    this.dbservice.get().then(files => {
-      files.forEach(element => {
-        this.files.push(element.file);
-      });
-    })
+    this.setList();
   }
 
   delete(id) {
-    this.dbservice.delete(id);
 
   }
 
+  setList() {
+   
+    this.dbservice.get()
+
+
+  }
 }

@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-
-import { LayoutComponent } from './app/image-maneger/layout/layout.component';
-import { EditorComponent } from './app/image-maneger/editor/editor.component';
+import { LayoutComponent } from './app/image-manager/layout/layout.component';
+import { EditorComponent } from './app/image-manager/editor/editor.component';
 
 
 const routes: Routes = [

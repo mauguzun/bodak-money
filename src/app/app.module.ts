@@ -18,23 +18,36 @@ import {
   MatGridListModule,
   MatCheckboxModule, MatSidenavModule, MatIconModule, MatCardModule, MatToolbarModule
 } from '@angular/material';
-import { LayoutComponent } from './app/image-maneger/layout/layout.component';
-import { CameraComponent } from './app/image-maneger/camera/camera.component';
-import { EditorComponent } from './app/image-maneger/editor/editor.component';
-import { ListComponent } from './app/image-maneger/list/list.component';
+import { LayoutComponent } from './app/image-manager/layout/layout.component';
+import { CameraComponent } from './app/image-manager/camera/camera.component';
+import { EditorComponent } from './app/image-manager/editor/editor.component';
+import { ListComponent } from './app/image-manager/list/list.component';
 
 
-import { UploaderComponent } from './app/image-maneger/uploader/uploader.component';
+import { UploaderComponent } from './app/image-manager/uploader/uploader.component';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { SpinnerComponent } from './shared/components/spinner/spinner.component';
 
+import { NgxIndexedDBModule, DBConfig } from 'ngx-indexed-db';
 
+
+const dbConfig: DBConfig = {
+  name: 'MyDb', version: 1, objectStoresMeta: [
+    {
+      store: 'files',
+      storeConfig: { keyPath: 'id', autoIncrement: false },
+      storeSchema: [
+        { name: 'docs', keypath: 'docs', options: { unique: false } },
+      ]
+    }
+  ]
+};
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    UploaderComponent,ListComponent,
+    UploaderComponent, ListComponent,
     LayoutComponent,
     CameraComponent,
     EditorComponent,
@@ -43,10 +56,11 @@ import { SpinnerComponent } from './shared/components/spinner/spinner.component'
     SpinnerComponent
   ],
   imports: [
+    NgxIndexedDBModule.forRoot(dbConfig),
     BrowserModule,
     AngularCropperjsModule,
     AppRoutingModule,
-    MatGridListModule, MatProgressSpinnerModule , MatListModule, MatButtonModule, MatCheckboxModule, MatSidenavModule, MatIconModule, MatToolbarModule, MatCardModule,
+    MatGridListModule, MatProgressSpinnerModule, MatListModule, MatButtonModule, MatCheckboxModule, MatSidenavModule, MatIconModule, MatToolbarModule, MatCardModule,
     FormsModule, NgxDropzoneModule,
     BrowserAnimationsModule
   ],

@@ -1,38 +1,24 @@
 import { Injectable } from '@angular/core';
-import { NgxIndexedDB } from 'ngx-indexed-db';
+import { NgxIndexedDBService } from 'ngx-indexed-db';
 import { DocumentFile } from '../models/DocumentFile.model';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class DbFileService {
-  // https://www.npmjs.com/package/ngx-indexed-db
-
-  private db: NgxIndexedDB;
-  private num = 1;
 
 
-  constructor() {
-    console.log("open")
-    this.db = new NgxIndexedDB('myDb', this.num);
-    this.db.openDatabase(1, evt => {
-
-      let objectStore = evt.currentTarget.result.createObjectStore('documents', { keyPath: 'id', autoIncrement: true })
-      objectStore.createIndex('file', 'file', { unique: false });
-    })
+  constructor(private dbService: NgxIndexedDBService) {
+    dbService.currentStore = 'files';
   }
 
-  async get() {
-    return await this.db.openDatabase(this.num).then(() => {
-      return this.db.getAll('documents').then();
-    });
-  }
+  get() {
 
-  add(file: DocumentFile) {
-
-    this.db.add('documents', { id: file.id, file }).then(
-      (data) => {
-        console.log('saved');
+    console.log("here not work");
+    this.dbService.getAll().then(
+      people => {
+        console.log(people);
       },
       error => {
         console.log(error);
@@ -40,7 +26,35 @@ export class DbFileService {
     );
   }
 
-  delete(file) {
+  getByKey(id) {
+    //
+    id = 1572364293056 // <-work
+    this.dbService.getByID(1572364293056).then(
+      person => {
+        console.log(person);
+        return person;
+      },
+      error => {
+        console.log(error);
+        return null;
+      }
+    );
+  }
+
+  add(file: DocumentFile) {
+
+    this.dbService.add({ id: file.id, file }).then(
+      () => {
+        return file.id;
+      },
+      error => {
+        console.log(error);
+        return false;
+      }
+    );
+  }
+
+  update() {
 
   }
 }

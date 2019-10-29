@@ -13,7 +13,7 @@ import { DbFileService } from 'src/app/shared/services/dbfile.service';
 export class EditorComponent implements OnInit {
 
   private id: string;
-  private document: any;
+  private document: DocumentFile;
 
   @ViewChild('angularCropper', { static: true }) public angularCropper: CropperComponent;
 
@@ -36,17 +36,13 @@ export class EditorComponent implements OnInit {
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id) {
-      // this.dbservice.getById(this.id).then(files => {
-
-      // })
+      this.dbservice.getByKey(this.id)
     }
-
-    //
-    this.imageUrl = this.document.src;
-    this.refreshCrop(this.imageUrl);
-
   }
-  ///
+  save() {
+    this.document.src = this.imageUrl;
+    //this.dbservice.update(this.document);
+  }
 
   refreshCrop(img) {
     this.imageUrl = img;
@@ -101,9 +97,6 @@ export class EditorComponent implements OnInit {
     this.cropperRes = this.angularCropper.cropper.getCroppedCanvas().toDataURL('image/jpeg');
   }
 
-  save() {
-    alert(123);
-  }
 
   // disable() {
   //   this.angularCropper.cropper.disable();
