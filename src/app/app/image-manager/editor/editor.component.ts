@@ -29,19 +29,28 @@ export class EditorComponent implements OnInit {
     checkCrossOrigin: true
   };
 
-  //////////
+
 
   constructor(private route: ActivatedRoute, private dbservice: DbFileService) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id) {
-      this.dbservice.getByKey(this.id)
+      this.dbservice.getByKey(this.id).then(e => {
+        console.log(e);
+        this.document = e;
+        this.imageUrl = this.document.src;
+
+      })
+
     }
   }
   save() {
-    this.document.src = this.imageUrl;
-    //this.dbservice.update(this.document);
+
+   
+    this.document.src = this.cropperRes;
+
+    this.dbservice.update(this.document);
   }
 
   refreshCrop(img) {

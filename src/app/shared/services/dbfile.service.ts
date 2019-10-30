@@ -1,60 +1,45 @@
 import { Injectable } from '@angular/core';
-import { NgxIndexedDBService } from 'ngx-indexed-db';
 import { DocumentFile } from '../models/DocumentFile.model';
 
+import Dexie from 'dexie';
+import { DexieService } from './DexieService';
 
-@Injectable({
-  providedIn: 'root'
-})
+
+
+@Injectable({ providedIn: 'root' })
+
+
 export class DbFileService {
 
+  table: Dexie.Table<DocumentFile, number>;
 
-  constructor(private dbService: NgxIndexedDBService) {
-    dbService.currentStore = 'files';
+  constructor(private dexieService: DexieService) {
+    this.table = this.dexieService.table('todos');
+
+    console.log(this.dexieService.isOpen())
+
   }
 
   get() {
 
-    console.log("here not work");
-    this.dbService.getAll().then(
-      people => {
-        console.log(people);
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    return this.table.toArray();
   }
 
-  getByKey(id) {
-    //
-    id = 1572364293056 // <-work
-    this.dbService.getByID(1572364293056).then(
-      person => {
-        console.log(person);
-        return person;
-      },
-      error => {
-        console.log(error);
-        return null;
-      }
-    );
+  getByKey(key) {
+    return this.table.get(Number(key));
   }
 
   add(file: DocumentFile) {
-
-    this.dbService.add({ id: file.id, file }).then(
-      () => {
-        return file.id;
-      },
-      error => {
-        console.log(error);
-        return false;
-      }
-    );
+    return this.table.add(file);
   }
 
-  update() {
+  update(file: DocumentFile) {
+    return this.table.update(file.id, file)
+    .then(()=> {})
+    .catch(e => { alert(e) })
+  }
 
+  delete(id) {
+    return this.table.delete(id);
   }
 }

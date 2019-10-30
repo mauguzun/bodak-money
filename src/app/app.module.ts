@@ -56,7 +56,7 @@ const dbConfig: DBConfig = {
     SpinnerComponent
   ],
   imports: [
-    NgxIndexedDBModule.forRoot(dbConfig),
+    //  NgxIndexedDBModule.forRoot(dbConfig),
     BrowserModule,
     AngularCropperjsModule,
     AppRoutingModule,

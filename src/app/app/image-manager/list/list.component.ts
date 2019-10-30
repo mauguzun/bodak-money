@@ -20,13 +20,19 @@ export class ListComponent implements OnInit {
   }
 
   delete(id) {
-
+    this.dbservice.delete(Number(id)).then(data => {
+      this.setList();
+    })
+  
   }
 
   setList() {
-   
-    this.dbservice.get()
-
+    this.loader = true;
+    this.dbservice.get().then(e => {
+      this.files = e;
+     
+      this.loader = false;
+    })
 
   }
 }
