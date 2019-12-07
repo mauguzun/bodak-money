@@ -43,7 +43,6 @@ const dbConfig: DBConfig = {
   ]
 };
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,11 +55,12 @@ const dbConfig: DBConfig = {
     SpinnerComponent
   ],
   imports: [
-    //  NgxIndexedDBModule.forRoot(dbConfig),
+      NgxIndexedDBModule.forRoot(dbConfig),
     BrowserModule,
     AngularCropperjsModule,
     AppRoutingModule,
-    MatGridListModule, MatProgressSpinnerModule, MatListModule, MatButtonModule, MatCheckboxModule, MatSidenavModule, MatIconModule, MatToolbarModule, MatCardModule,
+    MatGridListModule, 
+    MatProgressSpinnerModule, MatListModule, MatButtonModule, MatCheckboxModule, MatSidenavModule, MatIconModule, MatToolbarModule, MatCardModule,
     FormsModule, NgxDropzoneModule,
     BrowserAnimationsModule
   ],

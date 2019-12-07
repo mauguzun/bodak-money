@@ -30,8 +30,10 @@ export class UploaderComponent implements OnInit {
 
         this.dbService.add(doc);
         this.loader = false;
+        
       };
       this.reader.readAsDataURL(file);
+     
     });
 
   }
