@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NgxIndexedDBService } from 'ngx-indexed-db';
 import { DocumentFile } from '../models/DocumentFile.model';
+import { Subject, from } from 'rxjs';
 
 
 @Injectable({
@@ -9,9 +10,19 @@ import { DocumentFile } from '../models/DocumentFile.model';
 export class DbFileService {
 
 
+  public stream$ = from(this.get());
+
   constructor(private dbService: NgxIndexedDBService) {
     dbService.currentStore = 'files';
+
   }
+
+
+  reload() {
+    this.stream$ = from(this.get());
+  }
+
+
 
   get() {
     return this.dbService.getAll();
@@ -26,6 +37,7 @@ export class DbFileService {
 
     this.dbService.add({ id: file.id, file }).then(
       () => {
+        this.reload();
         return file;
       },
       error => {
@@ -38,7 +50,7 @@ export class DbFileService {
   delete(id) {
     return this.dbService.delete(id).then(
       () => {
-
+        this.reload();
       },
       error => {
         console.log(error);
@@ -49,7 +61,8 @@ export class DbFileService {
   update(file) {
     return this.dbService.delete(file.id).then(
       () => {
-        this.add(file)
+        this.add(file);
+
       },
       error => {
         console.log(error);

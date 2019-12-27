@@ -16,7 +16,7 @@ import {
   MatListModule,
   MatProgressSpinnerModule,
   MatGridListModule,
-  MatCheckboxModule, MatSidenavModule, MatIconModule, MatCardModule, MatToolbarModule
+  MatCheckboxModule, MatSidenavModule, MatIconModule, MatCardModule, MatToolbarModule, MatExpansionModule
 } from '@angular/material';
 import { LayoutComponent } from './app/image-manager/layout/layout.component';
 import { CameraComponent } from './app/image-manager/camera/camera.component';
@@ -29,6 +29,7 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
 import { SpinnerComponent } from './shared/components/spinner/spinner.component';
 
 import { NgxIndexedDBModule, DBConfig } from 'ngx-indexed-db';
+import { WebcamModule } from 'ngx-webcam';
 
 
 const dbConfig: DBConfig = {
@@ -55,13 +56,14 @@ const dbConfig: DBConfig = {
     SpinnerComponent
   ],
   imports: [
-      NgxIndexedDBModule.forRoot(dbConfig),
+    NgxIndexedDBModule.forRoot(dbConfig),
     BrowserModule,
     AngularCropperjsModule,
     AppRoutingModule,
-    MatGridListModule, 
-    MatProgressSpinnerModule, MatListModule, MatButtonModule, MatCheckboxModule, MatSidenavModule, MatIconModule, MatToolbarModule, MatCardModule,
-    FormsModule, NgxDropzoneModule,
+    MatGridListModule, WebcamModule,
+    MatProgressSpinnerModule, MatListModule,
+    MatButtonModule, MatCheckboxModule, MatSidenavModule, MatIconModule, MatToolbarModule, MatCardModule,
+    FormsModule, NgxDropzoneModule,MatExpansionModule,
     BrowserAnimationsModule
   ],
   providers: [],
