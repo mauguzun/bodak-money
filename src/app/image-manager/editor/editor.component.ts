@@ -36,10 +36,8 @@ export class EditorComponent implements OnInit {
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id) {
-      this.dbservice.getByKey(this.id).then((e) => {
-       
+      this.dbservice.getByKey(this.id).then((e) => {     
         this.document = e['file'];
-      
         this.imageUrl = this.document.src;
 
       })

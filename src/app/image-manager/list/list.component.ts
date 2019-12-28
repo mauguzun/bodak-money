@@ -10,9 +10,8 @@ import { Subject, Observable, from } from 'rxjs';
 })
 export class ListComponent implements OnInit {
 
-  // protected loader = true;
- 
 
+  public selected: DocumentFile[] = [];
 
   constructor(public dbservice: DbFileService) { }
 
@@ -21,15 +20,12 @@ export class ListComponent implements OnInit {
   }
 
   delete(id) {
-    this.dbservice.delete(Number(id)).then(data => {
-
-    })
-
+        this.dbservice.delete(Number(id)).then(data => {})
   }
 
+ 
 
 
-  
 
 }
 

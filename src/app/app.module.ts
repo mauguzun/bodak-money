@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule ,ReactiveFormsModule} from '@angular/forms';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 
 
@@ -13,23 +13,30 @@ import { AngularCropperjsModule } from 'angular-cropperjs';
 
 import {
   MatButtonModule,
-  MatListModule,
+  MatListModule, MatSnackBarModule,
   MatProgressSpinnerModule,
   MatGridListModule,
-  MatCheckboxModule, MatSidenavModule, MatIconModule, MatCardModule, MatToolbarModule, MatExpansionModule
+  MatCheckboxModule,
+  MatSidenavModule,
+  MatIconModule, MatCardModule, MatToolbarModule, MatExpansionModule, MatMenuModule, MatFormFieldModule, MatAutocompleteModule, MatInputModule
 } from '@angular/material';
-import { LayoutComponent } from './app/image-manager/layout/layout.component';
-import { CameraComponent } from './app/image-manager/camera/camera.component';
-import { EditorComponent } from './app/image-manager/editor/editor.component';
-import { ListComponent } from './app/image-manager/list/list.component';
+import { LayoutComponent } from './image-manager/layout/layout.component';
+import { CameraComponent } from './image-manager/camera/camera.component';
+import { EditorComponent } from './image-manager/editor/editor.component';
+import { ListComponent } from './image-manager/list/list.component';
 
 
-import { UploaderComponent } from './app/image-manager/uploader/uploader.component';
+import { UploaderComponent } from './image-manager/uploader/uploader.component';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { SpinnerComponent } from './shared/components/spinner/spinner.component';
 
 import { NgxIndexedDBModule, DBConfig } from 'ngx-indexed-db';
 import { WebcamModule } from 'ngx-webcam';
+
+
+import { CardComponent } from './image-manager/card/card.component';
+import { SaveComponent } from './image-manager/save/save.component';
+
 
 
 const dbConfig: DBConfig = {
@@ -53,18 +60,24 @@ const dbConfig: DBConfig = {
     EditorComponent,
     ListComponent,
     LoaderComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    CardComponent,
+    SaveComponent,
   ],
   imports: [
+    FormsModule,ReactiveFormsModule,
     NgxIndexedDBModule.forRoot(dbConfig),
     BrowserModule,
     AngularCropperjsModule,
     AppRoutingModule,
+    MatAutocompleteModule,
     MatGridListModule, WebcamModule,
-    MatProgressSpinnerModule, MatListModule,
-    MatButtonModule, MatCheckboxModule, MatSidenavModule, MatIconModule, MatToolbarModule, MatCardModule,
-    FormsModule, NgxDropzoneModule,MatExpansionModule,
-    BrowserAnimationsModule
+    MatProgressSpinnerModule, MatListModule, MatSnackBarModule,
+    MatButtonModule, MatCheckboxModule, MatSidenavModule, 
+    MatIconModule, MatToolbarModule, MatCardModule,
+    MatInputModule,
+    FormsModule, NgxDropzoneModule, MatExpansionModule,
+    BrowserAnimationsModule, MatMenuModule, MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]

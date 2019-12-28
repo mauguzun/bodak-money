@@ -1,0 +1,41 @@
+<div class="row" *ngIf="dbservice.localdb  else emptyList ">
+
+    <div  class="col-lg-4 col-md-6  col-sm-12 denis"  *ngFor="let i of dbservice.localdb" >
+    <app-card [file]="i"></app-card>
+    </div>
+    
+</div>
+
+
+
+
+
+
+<ng-template #emptyList>
+        <app-spinner></app-spinner>
+</ng-template>
+
+<mat-accordion>
+    <mat-expansion-panel class="box-box">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Upload File
+            </mat-panel-title>
+            <mat-panel-description>
+
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <app-uploader></app-uploader>
+    </mat-expansion-panel>
+    <mat-expansion-panel  class="box-box"  >
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Get From Camera
+            </mat-panel-title>
+            <mat-panel-description>
+
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <app-camera></app-camera>
+    </mat-expansion-panel>
+</mat-accordion>

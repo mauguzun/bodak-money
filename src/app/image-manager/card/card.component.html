@@ -1,0 +1,49 @@
+   
+ <mat-card class="box-box">
+        <mat-card-header>
+            <mat-card-title>
+
+                <mat-checkbox (change)="addImg(file.id)" class="example-margin">  
+                    {{ file.file.lastModifiedDate | date:'fullDate' }}</mat-checkbox>
+            </mat-card-title>
+            <mat-card-subtitle>
+                {{ file.file.name }}
+            </mat-card-subtitle>
+         
+        
+        </mat-card-header>
+        <img mat-card-image src="{{ file.src}}" alt="Photo of a Shiba Inu">
+
+        <mat-card-actions>
+
+         
+
+
+              <button mat-icon-button
+              color="primary"
+                [routerLink]="['editor',file.id]"   aria-label="Example icon-button with a heart icon">
+                <mat-icon>edit</mat-icon>
+              </button>
+
+
+              <button mat-icon-button 
+              (click)="delete(file.id)"
+              color="primary"
+              aria-label="Example icon-button with a heart icon">
+                  <mat-icon>delete</mat-icon>
+                </button>
+
+              <button 
+              *ngIf="file.file.checked"
+              (click)="save()"
+              mat-icon-button color="primary"  aria-label="Example icon-button with a heart icon">
+                <mat-icon>save</mat-icon>
+              </button>
+
+
+                
+
+
+
+        </mat-card-actions>
+    </mat-card> 

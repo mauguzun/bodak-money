@@ -1,16 +1,22 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { LayoutComponent } from './app/image-manager/layout/layout.component';
-import { EditorComponent } from './app/image-manager/editor/editor.component';
+import { LayoutComponent } from './image-manager/layout/layout.component';
+import { EditorComponent } from './image-manager/editor/editor.component';
+import { ListComponent } from './image-manager/list/list.component';
+import { SaveComponent } from './image-manager/save/save.component';
 
 
 const routes: Routes = [
   {
-    path: '', component: AppComponent, children: [
-      { path: '', component: LayoutComponent }]
+
+    path: '', component: LayoutComponent, children: [
+      { path: '', component: ListComponent },
+      { path: 'editor/:id', component: EditorComponent },
+      { path: 'save', component: SaveComponent },
+    ]
   },
-  { path: 'editor/:id', component: EditorComponent },
+
 
 ];
 

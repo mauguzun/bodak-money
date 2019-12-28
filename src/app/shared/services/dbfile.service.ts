@@ -10,11 +10,20 @@ import { Subject, from } from 'rxjs';
 export class DbFileService {
 
 
+  // list
+  //
+
+  public localdb: DocumentFile[] = [];
   public stream$ = from(this.get());
 
   constructor(private dbService: NgxIndexedDBService) {
     dbService.currentStore = 'files';
 
+    this.dbService.getAll<DocumentFile>().then(data => {
+      if (data.length > 0) {
+        this.localdb = data.map(x => x.file)
+      }
+    });
   }
 
 
@@ -22,14 +31,11 @@ export class DbFileService {
     this.stream$ = from(this.get());
   }
 
-
-
   get() {
     return this.dbService.getAll();
   }
 
   getByKey(id) {
-
     return this.dbService.getByID(id);
   }
 
@@ -37,7 +43,8 @@ export class DbFileService {
 
     this.dbService.add({ id: file.id, file }).then(
       () => {
-        this.reload();
+        this.localdb.push(file);
+        // this.reload();
         return file;
       },
       error => {
@@ -50,7 +57,7 @@ export class DbFileService {
   delete(id) {
     return this.dbService.delete(id).then(
       () => {
-        this.reload();
+        this.localdb = this.localdb.filter(x => x.id != id);
       },
       error => {
         console.log(error);
@@ -59,10 +66,10 @@ export class DbFileService {
   }
 
   update(file) {
-    return this.dbService.delete(file.id).then(
+
+    return this.delete(file.id).then(
       () => {
         this.add(file);
-
       },
       error => {
         console.log(error);
