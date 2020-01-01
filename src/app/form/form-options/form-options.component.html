@@ -1,0 +1,44 @@
+<mat-card class="box-box">
+    <mat-card-header>
+        <mat-card-title>{{element.type}}</mat-card-title>
+        <mat-card-subtitle>{{element.name}}</mat-card-subtitle>
+    </mat-card-header>
+
+
+    <mat-card-content>
+        <mat-form-field>
+            <input required [(ngModel)]="element.name" matInput placeholder="Name">
+        </mat-form-field>
+        <mat-form-field>
+            <input required [(ngModel)]="element.placeholder" matInput placeholder="Placeholder">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input  [(ngModel)]="element.value" matInput placeholder="Value">
+        </mat-form-field>
+
+
+        <mat-checkbox [(ngModel)]="element.required">Required</mat-checkbox>
+        <br>
+        <mat-checkbox [(ngModel)]="element.disabled">Disabled</mat-checkbox>
+
+
+
+
+    </mat-card-content>
+
+
+
+    <mat-card-actions>
+
+        <button mat-icon-button color="primary" (click)="save()">
+            <mat-icon>save</mat-icon>
+        </button>
+
+
+        <button mat-icon-button (click)="delete()" color="primary">
+            <mat-icon>delete</mat-icon>
+        </button>
+
+    </mat-card-actions>
+</mat-card>

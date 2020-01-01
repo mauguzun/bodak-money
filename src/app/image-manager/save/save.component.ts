@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { DbFileService } from 'src/app/shared/services/dbfile.service';
+import { DocumentFile } from 'src/app/shared/models/DocumentFile.model';
 
 export interface State {
   flag: string;
@@ -14,10 +16,21 @@ export interface State {
 })
 
 export class SaveComponent implements OnInit {
+
+
+  public files: DocumentFile[] = [];
+  myControl = new FormControl();
+  options: string[] = ['Check', 'other', 'hujzer'];
+
+
+  constructor(public dbservice: DbFileService) { }
   ngOnInit(): void {
+
+    this.dbservice.get().then(data => {
+      this.files = data.filter(x => x.checked);
+    })
 
   }
 
-  myControl = new FormControl();
-  options: string[] = ['check', 'other', 'hujzer'];
+
 }

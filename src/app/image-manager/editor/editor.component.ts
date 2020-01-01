@@ -31,14 +31,16 @@ export class EditorComponent implements OnInit {
 
 
 
-  constructor(private route: ActivatedRoute, private dbservice: DbFileService,private rout :Router) { }
+  constructor(private route: ActivatedRoute, private dbservice: DbFileService, private rout: Router) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id) {
-      this.dbservice.getByKey(this.id).then((e) => {     
-        this.document = e['file'];
-        this.imageUrl = this.document.src;
+      this.dbservice.getByKey(this.id).then((e) => {
+
+        this.document = e;
+        this.imageUrl = e.src;
+
 
       })
 
@@ -47,10 +49,10 @@ export class EditorComponent implements OnInit {
   save() {
 
     this.document.src = this.cropperRes;
-    this.dbservice.update(this.document).then(done=>{
+    this.dbservice.update(this.document).then(done => {
       this.rout.navigate(['/'])
     })
-   // 
+    // 
   }
 
   refreshCrop(img) {

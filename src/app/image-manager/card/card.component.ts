@@ -12,7 +12,7 @@ export class CardComponent implements OnInit {
 
   @Input() file: DocumentFile;
 
-  constructor(public dbservice: DbFileService,private  router : Router) { }
+  constructor(public dbservice: DbFileService, private router: Router) { }
 
   ngOnInit() {
 
@@ -21,16 +21,18 @@ export class CardComponent implements OnInit {
   delete(id) {
     this.dbservice.delete(Number(id)).then(data => {
 
-    })
+    });
 
   }
-  addImg(id) {
-    let  item = this.dbservice.localdb.find(x => x.id === id);
-    item.file.checked =! item.file.checked
+  tickCheckbox(id) {
+    const item = this.dbservice.localdb.find(x => x.id === id);
+    
+    item.checked = !item.checked;
+    this.dbservice.update(item);
   }
 
-  save(){
-    //todo checl
-    this.router.navigate(['/','save'])
+  save() {
+    // todo checl
+    this.router.navigate(['/', 'save']);
   }
 }

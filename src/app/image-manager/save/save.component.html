@@ -1,19 +1,57 @@
-<div class="row"  >
+<mat-card class="box-box">
 
-    <div class="col-12">
 
-        <form class="example-form">
-            <mat-form-field style="width: 100%;">
-                <input type="text" placeholder="Choose document type or create new " 
-                aria-label="Number" matInput [formControl]="myControl"
-                    [matAutocomplete]="auto">
-                <mat-autocomplete #auto="matAutocomplete">
-                    <mat-option *ngFor="let option of options" [value]="option">
-                        {{option}}
-                    </mat-option>
-                </mat-autocomplete>
-            </mat-form-field>
-        </form>
+    <mat-tab-group>
+        <mat-tab label="Select From Template">
+
+            <form class="example-form">
+                <mat-form-field class="form-order">
+                    <input type="text" placeholder="Choose document type or create new " aria-label="Number" matInput
+                        [formControl]="myControl" [matAutocomplete]="auto">
+                    <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let option of options" [value]="option">
+                            {{option}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+
+                <mat-form-field class="form-order">
+                    <input matInput [matDatepicker]="picker" placeholder="Deadline">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+
+                <mat-form-field class="form-order">
+                    <textarea matInput placeholder="Description"></textarea>
+                </mat-form-field>
+                <button mat-raised-button color="warn">Warn</button>
+            </form>
+
+        </mat-tab>
+        <mat-tab label="Create New ">
+
+
+
+        </mat-tab>
+
+    </mat-tab-group>
+
+
+
+</mat-card>
+
+<app-form-builder></app-form-builder>
+
+<mat-card>
+
+    <div class="row">
+        <div class="col-lg-4 col-md-6  col-sm-12 denis" *ngFor="let file of files">
+            <mat-card class="box-box">
+                <img mat-card-image src="{{ file.src}}" [alt]="file.id">
+
+            </mat-card>
+        </div>
     </div>
 
-</div>
+</mat-card>

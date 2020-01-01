@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule ,ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 
 
@@ -18,8 +18,9 @@ import {
   MatGridListModule,
   MatCheckboxModule,
   MatSidenavModule,
-  MatIconModule, MatCardModule, MatToolbarModule, MatExpansionModule, MatMenuModule, MatFormFieldModule, MatAutocompleteModule, MatInputModule
+  MatIconModule, MatCardModule, MatToolbarModule, MatExpansionModule, MatMenuModule, MatFormFieldModule, MatAutocompleteModule, MatInputModule, MatDatepickerModule, MatNativeDateModule
 } from '@angular/material';
+import { MatTabsModule } from '@angular/material/tabs'
 import { LayoutComponent } from './image-manager/layout/layout.component';
 import { CameraComponent } from './image-manager/camera/camera.component';
 import { EditorComponent } from './image-manager/editor/editor.component';
@@ -37,6 +38,9 @@ import { WebcamModule } from 'ngx-webcam';
 import { CardComponent } from './image-manager/card/card.component';
 import { SaveComponent } from './image-manager/save/save.component';
 
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { FormBuilderComponent } from './form/form-builder/form-builder.component';
+import { FormOptionsComponent } from './form/form-options/form-options.component';
 
 
 const dbConfig: DBConfig = {
@@ -63,9 +67,13 @@ const dbConfig: DBConfig = {
     SpinnerComponent,
     CardComponent,
     SaveComponent,
+    FormBuilderComponent,
+    FormOptionsComponent,
   ],
   imports: [
-    FormsModule,ReactiveFormsModule,
+    DragDropModule,
+    FormsModule, ReactiveFormsModule, MatDatepickerModule,
+    MatNativeDateModule,
     NgxIndexedDBModule.forRoot(dbConfig),
     BrowserModule,
     AngularCropperjsModule,
@@ -73,9 +81,9 @@ const dbConfig: DBConfig = {
     MatAutocompleteModule,
     MatGridListModule, WebcamModule,
     MatProgressSpinnerModule, MatListModule, MatSnackBarModule,
-    MatButtonModule, MatCheckboxModule, MatSidenavModule, 
+    MatButtonModule, MatCheckboxModule, MatSidenavModule,
     MatIconModule, MatToolbarModule, MatCardModule,
-    MatInputModule,
+    MatInputModule, MatTabsModule,
     FormsModule, NgxDropzoneModule, MatExpansionModule,
     BrowserAnimationsModule, MatMenuModule, MatFormFieldModule
   ],

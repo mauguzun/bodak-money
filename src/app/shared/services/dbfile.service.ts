@@ -21,27 +21,28 @@ export class DbFileService {
 
     this.dbService.getAll<DocumentFile>().then(data => {
       if (data.length > 0) {
-        this.localdb = data.map(x => x.file)
+        this.localdb = data;
       }
     });
   }
 
+  
 
   reload() {
     this.stream$ = from(this.get());
   }
 
   get() {
-    return this.dbService.getAll();
+    return this.dbService.getAll<DocumentFile>();
   }
 
   getByKey(id) {
-    return this.dbService.getByID(id);
+    return this.dbService.getByID<DocumentFile>(id);
   }
 
   add(file: DocumentFile) {
 
-    this.dbService.add({ id: file.id, file }).then(
+    this.dbService.add(file).then(
       () => {
         this.localdb.push(file);
         // this.reload();
@@ -65,16 +66,26 @@ export class DbFileService {
     );
   }
 
-  update(file) {
 
-    return this.delete(file.id).then(
-      () => {
-        this.add(file);
-      },
-      error => {
-        console.log(error);
-      }
-    );
+  update(file) {
+    console.log(file)
+
+    this.localdb.filter(x => x.id === file.id)[0].src = file.src;
+    this.localdb.filter(x => x.id === file.id)[0].checked = file.checked;
+    return this.dbService.update(file);
   }
+
+
+  // update(file) {
+
+  //   return this.delete(file.id).then(
+  //     () => {
+  //       this.add(file);
+  //     },
+  //     error => {
+  //       console.log(error);
+  //     }
+  //   );
+  // }
 
 }
