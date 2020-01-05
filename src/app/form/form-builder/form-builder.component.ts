@@ -1,4 +1,4 @@
-import { Component, OnInit, } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, } from '@angular/core';
 import { moveItemInArray, CdkDragDrop, } from '@angular/cdk/drag-drop';
 import { BuilderElement, ElementType } from '../../shared/models/BuilderElement';
 
@@ -9,14 +9,12 @@ import { BuilderElement, ElementType } from '../../shared/models/BuilderElement'
 })
 export class FormBuilderComponent implements OnInit {
 
-
+  @Output() onNewForm= new EventEmitter<BuilderElement[]>();
 
   public showOptions = false;
   public currentItem: BuilderElement = null;
 
   constructor() { }
-
-
 
   from: BuilderElement[] = [
     new BuilderElement(ElementType.input),
@@ -24,8 +22,7 @@ export class FormBuilderComponent implements OnInit {
   ];
 
 
-  result: BuilderElement[] = [new BuilderElement(ElementType.input)];
-
+  result: BuilderElement[] = [ new BuilderElement(ElementType.input)]
   ngOnInit() {
   }
 
@@ -39,10 +36,6 @@ export class FormBuilderComponent implements OnInit {
     }
   }
 
-  setValue($event) {
-    this.from[$event.target.id].value = "";
-  }
-
   setValueToList($event) {
     this.result[$event.target.id].value = $event.target.value;
   }
@@ -54,5 +47,10 @@ export class FormBuilderComponent implements OnInit {
   }
   toogle() {
     this.showOptions = false;
+  }
+
+  saveForm() {
+    alert('save form ! of cox not so easy ');
+    this.onNewForm.emit(this.result);
   }
 }
