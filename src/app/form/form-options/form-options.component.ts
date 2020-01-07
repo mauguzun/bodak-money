@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { RouterLink, Router } from '@angular/router';
+import { BuilderElement } from 'src/app/shared/models/BuilderElement';
 
 @Component({
   selector: 'app-form-options',
@@ -9,7 +10,7 @@ import { RouterLink, Router } from '@angular/router';
 export class FormOptionsComponent implements OnInit {
 
   @Output() changeOption = new EventEmitter();
-  @Input() element: Element;
+  @Input() element: BuilderElement;
 
 
   constructor(private router: Router) { }

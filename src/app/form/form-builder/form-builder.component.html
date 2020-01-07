@@ -53,7 +53,7 @@
                     <button mat-icon-button (click)="options(item)">
                         <mat-icon>more_vert</mat-icon>
                     </button>
-
+                   
                 </div>
 
             </div>
@@ -70,6 +70,6 @@
 
 <div class="row" *ngIf="showOptions">
     <div class="col-lg-12 col-md-12  col-sm-12 ">
-        <app-form-options [element]="currentItem" (changeOption)="toogle($op)"></app-form-options>
+        <app-form-options [element]="currentItem" (changeOption)="toogle()"></app-form-options>
     </div>
 </div>

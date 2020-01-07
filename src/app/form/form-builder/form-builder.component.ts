@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, } from '@angular/core';
 import { moveItemInArray, CdkDragDrop, } from '@angular/cdk/drag-drop';
 import { BuilderElement, ElementType } from '../../shared/models/BuilderElement';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-form-builder',
@@ -14,7 +15,7 @@ export class FormBuilderComponent implements OnInit {
   public showOptions = false;
   public currentItem: BuilderElement = null;
 
-  constructor() { }
+  constructor(private snackBar: MatSnackBar) { }
 
   from: BuilderElement[] = [
     new BuilderElement(ElementType.input),
@@ -50,7 +51,20 @@ export class FormBuilderComponent implements OnInit {
   }
 
   saveForm() {
-    alert('save form ! of cox not so easy ');
+    this.snackBar.open('Leha tut kak ta nada pudmat polushe !!! :) a to sliwkom legko ', null, {
+      duration: 2000,
+    });
+
+    if(this.result.length == 0){
+      return ;
+    }
+    for (const iterator of this.result) {
+      if(iterator.name === null){
+        alert("name must exist");
+        return ;
+      }
+   
+    }
     this.onNewForm.emit(this.result);
   }
 }

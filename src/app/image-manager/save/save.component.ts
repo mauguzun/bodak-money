@@ -4,6 +4,7 @@ import { DbFileService } from 'src/app/shared/services/dbfile.service';
 import { DocumentFile } from 'src/app/shared/models/DocumentFile.model';
 import { form } from './form';
 import { ErrorStateMatcher } from '@angular/material';
+import { TokenizeResult } from '@angular/compiler/src/ml_parser/lexer';
 
 export interface State {
   flag: string;
@@ -58,12 +59,28 @@ export class SaveComponent implements OnInit {
     this.dynamicForm = new FormGroup(forms);
   }
   submit() {
-    console.log(this.dynamicForm.get('BillId').errors);
-    console.log(this.dynamicForm.get('BillId').value);
+    if (this.dynamicForm.invalid) {
+      alert('invalid')
+    }
+    let res ={}
+    for (const field in this.dynamicForm.controls) {
+      //    const control = this.dynamicForm.get(field); 
+      res[field] = this.dynamicForm.get(field).value;
+      alert(field + ' : ' + res[field])
+    }
+
+  
+    console.log(JSON.stringify(res))
   }
 
   saveDynamicForm(form: []) {
     this.defForm = form;
+    this.formName = 'self maded'
     this.initForm();
+  }
+
+  saveFromExist() {
+    this.defForm = this.defForm;
+
   }
 }
