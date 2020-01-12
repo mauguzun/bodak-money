@@ -10,7 +10,7 @@ import { MatSnackBar } from '@angular/material';
 })
 export class FormBuilderComponent implements OnInit {
 
-  @Output() onNewForm= new EventEmitter<BuilderElement[]>();
+  @Output() onNewForm = new EventEmitter<BuilderElement[]>();
 
   public showOptions = false;
   public currentItem: BuilderElement = null;
@@ -18,12 +18,15 @@ export class FormBuilderComponent implements OnInit {
   constructor(private snackBar: MatSnackBar) { }
 
   from: BuilderElement[] = [
-    new BuilderElement(ElementType.input),
-    new BuilderElement(ElementType.textarea),
+    new BuilderElement(ElementType.input, 'Text Input'),
+    new BuilderElement(ElementType.inputNumber, 'Number Input'),
+    new BuilderElement(ElementType.select, 'Select '),
+    new BuilderElement(ElementType.date, 'Date '),
+    new BuilderElement(ElementType.textarea, 'Textarea'),
   ];
 
 
-  result: BuilderElement[] = [ new BuilderElement(ElementType.input)]
+  result: BuilderElement[] = [ new BuilderElement(ElementType.select, 'Select '),]
   ngOnInit() {
   }
 
@@ -32,8 +35,9 @@ export class FormBuilderComponent implements OnInit {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else if (event.container.element.nativeElement.id === 'result') {
-
-      this.result.splice(event.currentIndex, 0, Object.assign({}, this.from[event.previousIndex]));
+      let copied = Object.assign({}, this.from[event.previousIndex]);
+      copied.id = <any>new Date() / 1;
+      this.result.splice(event.currentIndex, 0, copied);
     }
   }
 
@@ -41,7 +45,8 @@ export class FormBuilderComponent implements OnInit {
     this.result[$event.target.id].value = $event.target.value;
   }
 
-  options(item) {
+  options(item, index) {
+
     this.currentItem = item;
     this.showOptions = true;
 
@@ -49,21 +54,24 @@ export class FormBuilderComponent implements OnInit {
   toogle() {
     this.showOptions = false;
   }
+  delete() {
+    this.result = this.result.filter(x => x.id !== this.currentItem.id);
+    this.toogle();
+  }
 
   saveForm() {
     this.snackBar.open('Leha tut kak ta nada pudmat polushe !!! :) a to sliwkom legko ', null, {
       duration: 2000,
     });
 
-    if(this.result.length == 0){
-      return ;
+    if (this.result.length == 0) {
+      return;
     }
     for (const iterator of this.result) {
-      if(iterator.name === null){
+      if (iterator.name === null) {
         alert("name must exist");
-        return ;
+        return;
       }
-   
     }
     this.onNewForm.emit(this.result);
   }

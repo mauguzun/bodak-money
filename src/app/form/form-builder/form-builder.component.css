@@ -13,6 +13,14 @@
     box-sizing: border-box;
     cursor: move;
   }
+  .error{
+    border-left:1px dotted red !important;
+  }
+
+  .save{
+    margin-top: 20px;
+    padding: 10px;
+  }
 
   .drop-it{
     min-height: 100px;

@@ -5,6 +5,7 @@ import { LayoutComponent } from './image-manager/layout/layout.component';
 import { EditorComponent } from './image-manager/editor/editor.component';
 import { ListComponent } from './image-manager/list/list.component';
 import { SaveComponent } from './image-manager/save/save.component';
+import { FormBuilderComponent } from './form/form-builder/form-builder.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
       { path: '', component: ListComponent },
       { path: 'editor/:id', component: EditorComponent },
       { path: 'save', component: SaveComponent },
+      { path: 'formbuilder', component: FormBuilderComponent, },
     ]
   },
 

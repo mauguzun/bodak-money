@@ -1,20 +1,27 @@
 
 export enum ElementType {
-    input = 'input', textarea = 'textarea'
+    input = 'input',
+    inputNumber = 'inputNumber', textarea = 'textarea', date = 'date', select = 'select'
 }
 
 export class BuilderElement {
 
+    public id: any =  new Date() as any / 1;
     public type: ElementType;
-    public required: boolean = true;
+    public required = true;
     public name?: string = null;
-    public placeholder?: string = 'Placeholder';
+    public placeholder = 'Placeholder';
     public value?: string = null;
-    public max?: string = null;
-    public min?: string = null;
-    public disabled?: boolean = false;
+    public options: Map<string, string> = new Map<string, string>();
+    public disabled = false;
 
-    constructor(type: ElementType) {
+
+    constructor(type: ElementType, placehloder?: string) {
         this.type = type;
+        this.placeholder = placehloder;
+
+        this.options.set('value', 'some text');
+        this.options.set('other value', 'other text');
+        this.options.set('one more  value', 'one more text');
     }
 }

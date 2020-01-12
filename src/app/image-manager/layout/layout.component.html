@@ -9,19 +9,19 @@
                 <mat-icon>menu</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
-                <button mat-menu-item>
+                <button mat-menu-item  [routerLink]="['/']" >
                     <mat-icon>home</mat-icon>
-                    <span>Recipe</span>
+                    <span>Images List</span>
                 </button>
                 <button mat-menu-item>
                     <mat-icon>dialpad</mat-icon>
                     <span>About</span>
                 </button>
-                <button mat-menu-item>
+                <button mat-menu-item [routerLink]="['/formbuilder']" >
                     <mat-icon>email</mat-icon>
-                    <span>Contact</span>
+                    <span>Form builder</span>
                 </button>
-                <button mat-menu-item [routerLink]="['/page','privacy']">
+                <button mat-menu-item [routerLink]="['/formbuilder']">
                     <mat-icon>notifications_off</mat-icon>
                     <span>Privacy Policy Page</span>
                 </button>

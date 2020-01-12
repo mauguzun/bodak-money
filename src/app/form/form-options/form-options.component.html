@@ -14,13 +14,48 @@
         </mat-form-field>
 
         <mat-form-field>
-            <input  [(ngModel)]="element.value" matInput placeholder="Value">
+            <input [(ngModel)]="element.value" matInput placeholder="Value">
         </mat-form-field>
+
+
+
+        <div class="row" *ngIf="element.type === 'select' ">
+            <div class="col-6">
+                <mat-form-field>
+                    <textarea (keyup)="values($event)" style="min-height: 100px;" placeholder="value=text"
+                        [value]="mapValue()" matInput> </textarea>
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+
+                <mat-progress-bar *ngIf="showOtptions === false" mode="indeterminate"></mat-progress-bar>
+
+
+                <mat-form-field *ngIf="element.options.size > 0 && showOtptions">
+                    <mat-label>{{ element.placeholder }}</mat-label>
+                    <mat-select [value]="element.options.keys().next().value">
+                        <mat-option *ngFor="let recipient of element.options | keyvalue" [value]="recipient.key">
+                            {{recipient.value}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+
 
 
         <mat-checkbox [(ngModel)]="element.required">Required</mat-checkbox>
         <br>
-        <mat-checkbox [(ngModel)]="element.disabled">Disabled</mat-checkbox>
+        <mat-checkbox *ngIf="element.type !=  'date' ||  element.type !=  'select'  " [(ngModel)]="element.disabled">
+            Disabled</mat-checkbox>
 
 
 

@@ -24,7 +24,7 @@ import {
     MatExpansionModule,
      MatMenuModule, 
      MatFormFieldModule, 
-     MatAutocompleteModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatStepperModule, MatProgressBarModule
+     MatAutocompleteModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatStepperModule, MatProgressBarModule, MatSelectModule
 } from '@angular/material';
 import { MatTabsModule } from '@angular/material/tabs'
 import { LayoutComponent } from './image-manager/layout/layout.component';
@@ -88,7 +88,7 @@ const dbConfig: DBConfig = {
     MatGridListModule, WebcamModule,
     MatProgressSpinnerModule, MatListModule, MatSnackBarModule,
     MatButtonModule, MatCheckboxModule, MatSidenavModule,
-    MatIconModule, MatToolbarModule, MatCardModule,
+    MatIconModule, MatToolbarModule, MatCardModule,MatSelectModule,
     MatInputModule, MatTabsModule,MatProgressBarModule,
     FormsModule, NgxDropzoneModule, MatExpansionModule,
     BrowserAnimationsModule, MatMenuModule, MatFormFieldModule
