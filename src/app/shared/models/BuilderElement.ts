@@ -6,13 +6,13 @@ export enum ElementType {
 
 export class BuilderElement {
 
-    public id: any =  new Date() as any / 1;
+    public id: any = new Date() as any / 1;
     public type: ElementType;
     public required = true;
     public name?: string = null;
     public placeholder = 'Placeholder';
     public value?: string = null;
-    public options: Map<string, string> = new Map<string, string>();
+    public options:any  []= [];
     public disabled = false;
 
 
@@ -20,8 +20,5 @@ export class BuilderElement {
         this.type = type;
         this.placeholder = placehloder;
 
-        this.options.set('value', 'some text');
-        this.options.set('other value', 'other text');
-        this.options.set('one more  value', 'one more text');
     }
 }

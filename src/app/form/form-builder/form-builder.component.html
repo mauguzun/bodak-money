@@ -13,9 +13,9 @@
 
                     <mat-form-field *ngIf="item.type === 'select' ">
                         <mat-label>{{ item.placeholder }}</mat-label>
-                        <mat-select [value]="item.options.keys().next().value">
-                            <mat-option *ngFor="let recipient of item.options | keyvalue" [value]="recipient.key">
-                                {{recipient.value}}
+                        <mat-select>
+                            <mat-option *ngFor="let recipient of item.options " [value]="recipient.key">
+                                {{recipient.text}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -59,7 +59,7 @@
                 [cdkDropListConnectedTo]="[todoList]" class="drop-it" (cdkDropListDropped)="drop($event)">
 
                 <small>
-                    {{ result | json }}
+                    <!-- {{ result | json }} -->
                 </small>
                 <div class="example-box error" [ngClass]="{'error': item.name === null || item.placeholder === null 
             || (item.type === 'select' &&  item.options.size === 0 )}" *ngFor="let item of result ;let i = index  "
@@ -69,9 +69,9 @@
 
                     <mat-form-field *ngIf="item.type === 'select' ">
                         <mat-label>{{ item.placeholder }}</mat-label>
-                        <mat-select [value]="item.options.keys().next().value">
-                            <mat-option *ngFor="let recipient of item.options | keyvalue" [value]="recipient.key">
-                                {{recipient.value}}
+                        <mat-select>
+                            <mat-option *ngFor="let recipient of item.options " [value]="recipient.key">
+                                {{recipient.text}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
@@ -113,20 +113,22 @@
 
 
 
-           
-<div class="save">
 
-
-
-                    <div>
-                        <mat-form-field>
-                            <input placeholder='Form name' required matInput>
-                        </mat-form-field>
-                    </div>
-                    <div>
-                        <button (click)="saveForm()" mat-raised-button color="warn">Save Form </button>
-                    </div>
-                </div>   
+            <div class="save">
+                <div>
+                    <mat-form-field>
+                        <input placeholder='Form name' [(ngModel)]="formName" required matInput>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <!-- <button
+                         [disabled]="formName === null || formName.trim() == ''"
+                        (click)="saveForm()" mat-raised-button color="warn">Save Form </button
+                            > -->
+                    <button [disabled]="formName === null || formName.trim() == ''" (click)="saveForm()"
+                        mat-raised-button color="warn">Save Form </button>
+                </div>
+            </div>
 
 
         </mat-card>

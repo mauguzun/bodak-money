@@ -1,7 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, } from '@angular/core';
 import { moveItemInArray, CdkDragDrop, } from '@angular/cdk/drag-drop';
 import { BuilderElement, ElementType } from '../../shared/models/BuilderElement';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialogConfig, MatDialog } from '@angular/material';
+import { ErrorPageComponent } from 'src/app/shared/components/error-page/error-page.component';
 
 @Component({
   selector: 'app-form-builder',
@@ -14,8 +15,9 @@ export class FormBuilderComponent implements OnInit {
 
   public showOptions = false;
   public currentItem: BuilderElement = null;
+  public formName = null;
 
-  constructor(private snackBar: MatSnackBar) { }
+  constructor(private snackBar: MatSnackBar, private dialog: MatDialog) { }
 
   from: BuilderElement[] = [
     new BuilderElement(ElementType.input, 'Text Input'),
@@ -26,7 +28,7 @@ export class FormBuilderComponent implements OnInit {
   ];
 
 
-  result: BuilderElement[] = [ new BuilderElement(ElementType.select, 'Select '),]
+  result: BuilderElement[] = [  new BuilderElement(ElementType.input, 'Text Input')];
   ngOnInit() {
   }
 
@@ -35,8 +37,8 @@ export class FormBuilderComponent implements OnInit {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else if (event.container.element.nativeElement.id === 'result') {
-      let copied = Object.assign({}, this.from[event.previousIndex]);
-      copied.id = <any>new Date() / 1;
+      const copied = Object.assign({}, this.from[event.previousIndex]);
+      copied.id = new Date() as any / 1;
       this.result.splice(event.currentIndex, 0, copied);
     }
   }
@@ -60,19 +62,38 @@ export class FormBuilderComponent implements OnInit {
   }
 
   saveForm() {
-    this.snackBar.open('Leha tut kak ta nada pudmat polushe !!! :) a to sliwkom legko ', null, {
-      duration: 2000,
-    });
+
+    const errors = new Set();
+
+   
+    alert(JSON.stringify(this.result));
+
 
     if (this.result.length == 0) {
-      return;
+      errors.add('Please drop form element on result area');
     }
     for (const iterator of this.result) {
       if (iterator.name === null) {
-        alert("name must exist");
-        return;
+        errors.add('All elements must have name');
+
+      }
+      if (iterator.type === ElementType.select && iterator.options.length === 0) {
+        errors.add(iterator.name + ': drop down  must have options');
       }
     }
-    this.onNewForm.emit(this.result);
+    if (errors.size === 0) {
+      this.onNewForm.emit(this.result);
+    } else {
+
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = false;
+      dialogConfig.autoFocus = true;
+      dialogConfig.minWidth = '90%';
+      dialogConfig.data = errors;
+
+      this.dialog.open(ErrorPageComponent, dialogConfig);
+    }
+
   }
+
 }

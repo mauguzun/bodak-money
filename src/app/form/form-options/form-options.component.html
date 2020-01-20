@@ -18,7 +18,6 @@
         </mat-form-field>
 
 
-
         <div class="row" *ngIf="element.type === 'select' ">
             <div class="col-6">
                 <mat-form-field>
@@ -31,11 +30,11 @@
                 <mat-progress-bar *ngIf="showOtptions === false" mode="indeterminate"></mat-progress-bar>
 
 
-                <mat-form-field *ngIf="element.options.size > 0 && showOtptions">
+                <mat-form-field *ngIf="element.options.length > 0 && showOtptions">
                     <mat-label>{{ element.placeholder }}</mat-label>
-                    <mat-select [value]="element.options.keys().next().value">
-                        <mat-option *ngFor="let recipient of element.options | keyvalue" [value]="recipient.key">
-                            {{recipient.value}}
+                    <mat-select [value]="element.options[0].key">
+                        <mat-option *ngFor="let recipient of element.options " [value]="recipient.key">
+                            {{recipient.text}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>

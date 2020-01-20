@@ -1,0 +1,19 @@
+<h4 mat-dialog-title>
+    Some errors
+</h4>
+
+<mat-dialog-content>
+
+
+    <mat-list role="list">
+        <mat-list-item *ngFor="let error of errors" role="listitem"> {{error}}</mat-list-item>
+    </mat-list>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+
+    <button mat-icon-button color="warn" [mat-dialog-close]="">
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-dialog-actions>

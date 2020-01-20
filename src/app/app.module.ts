@@ -19,12 +19,20 @@ import {
   MatCheckboxModule,
   MatSidenavModule,
   MatIconModule,
-   MatCardModule, 
-   MatToolbarModule,
-    MatExpansionModule,
-     MatMenuModule, 
-     MatFormFieldModule, 
-     MatAutocompleteModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatStepperModule, MatProgressBarModule, MatSelectModule
+  MatCardModule,
+  MatToolbarModule,
+  MatExpansionModule,
+  MatMenuModule,
+  MatFormFieldModule,
+  MatAutocompleteModule,
+  MatInputModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatStepperModule,
+  MatProgressBarModule,
+  MatSelectModule,
+  MatDialog,
+  MatDialogModule
 } from '@angular/material';
 import { MatTabsModule } from '@angular/material/tabs'
 import { LayoutComponent } from './image-manager/layout/layout.component';
@@ -47,6 +55,7 @@ import { SaveComponent } from './image-manager/save/save.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FormBuilderComponent } from './form/form-builder/form-builder.component';
 import { FormOptionsComponent } from './form/form-options/form-options.component';
+import { ErrorPageComponent } from './shared/components/error-page/error-page.component';
 
 
 const dbConfig: DBConfig = {
@@ -75,6 +84,7 @@ const dbConfig: DBConfig = {
     SaveComponent,
     FormBuilderComponent,
     FormOptionsComponent,
+    ErrorPageComponent,
   ],
   imports: [
     DragDropModule,
@@ -84,16 +94,19 @@ const dbConfig: DBConfig = {
     BrowserModule,
     AngularCropperjsModule,
     AppRoutingModule,
-    MatAutocompleteModule,MatStepperModule,
+    MatAutocompleteModule, MatStepperModule,
     MatGridListModule, WebcamModule,
     MatProgressSpinnerModule, MatListModule, MatSnackBarModule,
     MatButtonModule, MatCheckboxModule, MatSidenavModule,
-    MatIconModule, MatToolbarModule, MatCardModule,MatSelectModule,
-    MatInputModule, MatTabsModule,MatProgressBarModule,
+    MatIconModule, MatToolbarModule, MatCardModule, MatSelectModule,
+    MatInputModule, MatTabsModule, MatProgressBarModule,
     FormsModule, NgxDropzoneModule, MatExpansionModule,
-    BrowserAnimationsModule, MatMenuModule, MatFormFieldModule
-  ],
+    BrowserAnimationsModule, MatMenuModule, MatFormFieldModule,
+    MatDialogModule
+  ],  
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ErrorPageComponent]
+
 })
 export class AppModule { }

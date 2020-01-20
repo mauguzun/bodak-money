@@ -62,14 +62,14 @@ export class SaveComponent implements OnInit {
     if (this.dynamicForm.invalid) {
       alert('invalid')
     }
-    let res ={}
+    let res = {}
     for (const field in this.dynamicForm.controls) {
       //    const control = this.dynamicForm.get(field); 
       res[field] = this.dynamicForm.get(field).value;
       alert(field + ' : ' + res[field])
     }
 
-  
+
     console.log(JSON.stringify(res))
   }
 

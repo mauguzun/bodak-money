@@ -1,137 +1,60 @@
-<mat-vertical-stepper [linear]="true" #stepper>
-    <mat-step [stepControl]="firstFormGroup">
+<mat-card class="box">
 
-        <div #firstFormGroup>
-            <ng-template matStepLabel>Pick form or create new </ng-template>
-
-            <mat-accordion>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            Select Form
-                        </mat-panel-title>
-
-                    </mat-expansion-panel-header>
-
-                
-                        <mat-form-field class="form-order">
-                            <input type="text" placeholder="Choose document type or create new "
-                             [(ngModel)]="formName"
-                                matInput [matAutocomplete]="auto">
-                            <mat-autocomplete #auto="matAutocomplete">
-                                <mat-option *ngFor="let option of options" [value]="option">
-                                    {{option}}
-                                </mat-option>
-                            </mat-autocomplete>
-                        </mat-form-field>
+    <h6>Basic mat-select</h6>
+    <mat-form-field class="form-order">
+        <mat-label>Select Form type </mat-label>
+        <mat-select required >
+           
+            <mat-option *ngFor="let option of options" [value]="option">
+                {{option}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
 
 
-                        <button mat-raised-button  (click)="saveFromExist()"    color="warn">Warn</button>
-                  
-
-                </mat-expansion-panel>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            Self aware panel
-                        </mat-panel-title>
-
-                    </mat-expansion-panel-header>
-                    <app-form-builder
-                    (onNewForm)="saveDynamicForm($event)"
-                    ></app-form-builder
-                        >
-
-
-                </mat-expansion-panel>
-            </mat-accordion>
-
-
-
-            <div>
-
-                <button matStepperNext mat-icon-button>
-                    <mat-icon>arrow_forward</mat-icon>
-                </button>
-            </div>
-        </div>
-    </mat-step>
+</mat-card>
 
 
 
 
 
-    <mat-step [stepControl]="secondFormGroup">
-        <div #secondFormGroup>
-            <ng-template matStepLabel>Fill form {{ formName }}</ng-template>
 
 
-            <mat-card>
-                <form [formGroup]="dynamicForm" (ngSubmit)="submit()">
 
 
-                    <div *ngFor="let item of defForm ;let i = index ">
 
-                        <mat-form-field *ngIf="item.type === 'input' ">
-                            <input [disabled]="item.disabled" [placeholder]="item.placeholder"
-                                [formControlName]="item.name" [value]="item.value" [required]="item.required" matInput>
-                                <mat-error >Required</mat-error>
-                        </mat-form-field>
-
-                        <mat-form-field *ngIf="item.type  === 'textarea' ">
-                            <textarea [disabled]="item.disabled" [placeholder]="item.placeholder" [value]="item.value"
-                            [formControlName]="item.name"   [required]="item.required" matInput></textarea>
-                        </mat-form-field>
-
-                    </div>
+<mat-card class="box">
+    <form [formGroup]="dynamicForm" (ngSubmit)="submit()">
 
 
-                    <div>
-                        <button type="submit" mat-raised-button color="accent">Accent</button>
-                    </div>
-                </form>
-            </mat-card>
+        <div *ngFor="let item of defForm ;let i = index ">
 
+            <mat-form-field *ngIf="item.type === 'input' ">
+                <input [disabled]="item.disabled" [placeholder]="item.placeholder" [formControlName]="item.name"
+                    [value]="item.value" [required]="item.required" matInput>
+                <mat-error>Required</mat-error>
+            </mat-form-field>
 
-            <div>
-                <button matStepperPrevious mat-icon-button>
-                    <mat-icon>arrow_back</mat-icon>
-                </button>
-                <button matStepperNext mat-icon-button>
-                    <mat-icon>arrow_forward</mat-icon>
-                </button>
-            </div>
+            <mat-form-field *ngIf="item.type  === 'textarea' ">
+                <textarea [disabled]="item.disabled" [placeholder]="item.placeholder" [value]="item.value"
+                    [formControlName]="item.name" [required]="item.required" matInput></textarea>
+            </mat-form-field>
+
         </div>
 
-    </mat-step>
 
-
-    <mat-step [stepControl]="lastFormGroup">
-        <div #lastFormGroup>
-            <ng-template matStepLabel>Done</ng-template>
-            <mat-card>
-
-                <mat-form-field class="form-order">
-                    <input matInput [matDatepicker]="picker" placeholder="Deadline">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
-
-                <mat-form-field class="form-order">
-                    <textarea matInput placeholder="Description"></textarea>
-                </mat-form-field>
-                <button mat-raised-button color="warn">Warn</button>
-            </mat-card>
-
-            <div>
-                <button matStepperNext mat-icon-button>
-                    <mat-icon>arrow_back</mat-icon>
-                </button>
-
-            </div>
+        <div>
+            <button type="submit" mat-raised-button color="accent">Accent</button>
         </div>
-    </mat-step>
-</mat-vertical-stepper>
+    </form>
+</mat-card>
+
+
+
+
+
+
+
 
 
 <mat-card>
