@@ -28,7 +28,7 @@ export class FormBuilderComponent implements OnInit {
   ];
 
 
-  result: BuilderElement[] = [  new BuilderElement(ElementType.input, 'Text Input')];
+  result: BuilderElement[] = [new BuilderElement(ElementType.input, 'Text Input')];
   ngOnInit() {
   }
 
@@ -65,8 +65,8 @@ export class FormBuilderComponent implements OnInit {
 
     const errors = new Set();
 
-   
-    alert(JSON.stringify(this.result));
+
+
 
 
     if (this.result.length == 0) {
@@ -82,7 +82,14 @@ export class FormBuilderComponent implements OnInit {
       }
     }
     if (errors.size === 0) {
-      this.onNewForm.emit(this.result);
+
+
+
+      localStorage.setItem(this.formName, JSON.stringify(this.result));
+      this.snackBar.open(`${this.formName} saved`);
+
+
+      //   this.onNewForm.emit(this.result);
     } else {
 
       const dialogConfig = new MatDialogConfig();
